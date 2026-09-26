@@ -1,0 +1,24 @@
+while true
+    let calc = input "calc: "
+
+    if calc == "exit"
+        break
+
+    let parts = calc.match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*/])\s*(-?\d+(?:\.\d+)?)\s*$/)
+
+    if parts == null
+        print "Enter: number operator number"
+        continue
+
+    let a = Number(parts[1])
+    let operator = parts[2]
+    let b = Number(parts[3])
+
+    if operator == "+"
+        print a + b
+    elif operator == "-"
+        print a - b
+    elif operator == "*"
+        print a * b
+    elif operator == "/"
+        print a / b

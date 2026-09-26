@@ -1,0 +1,20 @@
+{
+  "comments": {
+    "lineComment": "//"
+  },
+  "brackets": [],
+  "autoClosingBrackets": [],
+  "autoClosingQuotes": ["\"", "'", "`"],
+  "surroundingPairs": [
+    ["\"", "\""],
+    ["'", "'"],
+    ["`", "`"],
+    ["(", ")"],
+    ["[", "]"]
+  ],
+  "indentationRules": {
+    "increaseIndentPattern": "^(\\s*)(if|elif|else|while|for|function|async)\\b.*$",
+    "decreaseIndentPattern": "^\\s*(else|elif)\\b.*$"
+  },
+  "wordPattern": "(-?\\d+(\\.\\d+)?)|([A-Za-z_$][\\w$]*)"
+}

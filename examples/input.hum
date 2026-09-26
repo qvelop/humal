@@ -1,0 +1,13 @@
+let name = input "Name: "
+let age = input "Age: "
+
+fn checkAge(age)
+    if age >= 18
+        return "Adult"
+    else
+        return "Underage"
+
+let status = checkAge(age)
+
+print "Hello " + name
+print status

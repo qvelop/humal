@@ -1,0 +1,67 @@
+{
+  "if block": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}",
+      "\t${0:print \"yes\"}"
+    ],
+    "description": "Humal if block"
+  },
+  "if else": {
+    "prefix": "ifelse",
+    "body": [
+      "if ${1:condition}",
+      "\t${2:print \"yes\"}",
+      "else",
+      "\t${0:print \"no\"}"
+    ],
+    "description": "Humal if/else block"
+  },
+  "elif": {
+    "prefix": "elif",
+    "body": [
+      "elif ${1:condition}",
+      "\t${0:print \"...\"}"
+    ],
+    "description": "Humal elif block"
+  },
+  "while": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition}",
+      "\t${0:print \"...\"}"
+    ],
+    "description": "Humal while block"
+  },
+  "for in": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:items}",
+      "\t${0:print item}"
+    ],
+    "description": "Humal for-in loop"
+  },
+  "function": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:name}(${2:args})",
+      "\t${0:print \"...\"}"
+    ],
+    "description": "Humal function"
+  },
+  "input": {
+    "prefix": "input",
+    "body": [
+      "input \"${1:Prompt: }\""
+    ],
+    "description": "Humal input"
+  },
+  "async function": {
+    "prefix": "async",
+    "body": [
+      "async function ${1:name}(${2:args})",
+      "\t${0:await something()}"
+    ],
+    "description": "Async Humal function"
+  }
+}

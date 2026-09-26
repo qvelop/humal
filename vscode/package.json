@@ -1,0 +1,80 @@
+{
+  "name": "humal-language",
+  "displayName": "Humal Language",
+  "description": "Humal language support for VS Code",
+  "version": "1.0.0",
+  "publisher": "humal-language",
+  "license": "MIT",
+  "icon": "./images/humal.png",
+  "engines": {
+    "vscode": ">=1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "humal",
+    "language",
+    "compiler",
+    "javascript",
+    "indentation"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:humal"
+  ],
+"contributes": {
+  "configurationDefaults": {
+    "[humal]": {
+      "editor.wordBasedSuggestions": "off"
+    }
+  },
+
+  "languages": [
+    {
+      "id": "humal",
+      "aliases": [
+        "Humal",
+        "hum"
+      ],
+      "extensions": [
+        ".hum"
+      ],
+      "configuration": "./language-configuration.json",
+      "icon": {
+        "light": "./images/humal-file.svg",
+        "dark": "./images/humal-file.svg"
+      }
+    }
+  ],
+    "grammars": [
+      {
+        "language": "humal",
+        "scopeName": "source.humal",
+        "path": "./syntaxes/humal.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "humal",
+        "path": "./snippets/humal.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Humal Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/humal-color-theme.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "humal-icons",
+        "label": "Humal Icons",
+        "path": "./themes/humal-icon-theme.json"
+      }
+    ]
+  }
+}
+

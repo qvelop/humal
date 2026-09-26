@@ -1,0 +1,133 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Humal",
+  "scopeName": "source.humal",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#keywords" },
+    { "include": "#builtins" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#functions" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.humal",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.humal",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            { "name": "constant.character.escape.humal", "match": "\\\\." }
+          ]
+        },
+        {
+          "name": "string.quoted.single.humal",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            { "name": "constant.character.escape.humal", "match": "\\\\." }
+          ]
+        },
+        {
+          "name": "string.quoted.other.humal",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            { "name": "constant.character.escape.humal", "match": "\\\\." }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.declaration.humal",
+          "match": "\\b(let|const|var|fn|class|extends|static)\\b"
+        },
+        {
+          "name": "keyword.control.conditional.humal",
+          "match": "\\b(if|else|elif|switch|case|default)\\b"
+        },
+        {
+          "name": "keyword.control.loop.humal",
+          "match": "\\b(for|while|do|break|continue|in|of)\\b"
+        },
+        {
+          "name": "keyword.control.async.humal",
+          "match": "\\b(async|await|yield)\\b"
+        },
+        {
+          "name": "keyword.control.flow.humal",
+          "match": "\\b(return|throw|try|catch|finally|new|delete)\\b"
+        },
+        {
+          "name": "keyword.module.humal",
+          "match": "\\b(import|export|from|as)\\b"
+        },
+        {
+          "name": "keyword.operator.word.humal",
+          "match": "\\b(typeof|instanceof|void)\\b"
+        },
+        {
+          "name": "keyword.other.humal",
+          "match": "\\b(get|set|this|super|with|debugger)\\b"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.humal",
+          "match": "\\b(print|input|require)\\b"
+        },
+        {
+          "name": "support.function.builtin.humal",
+          "match": "\\b(parseInt|parseFloat|Number|String|Boolean|Array|Object|Math|JSON|Date|Promise|console)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.humal",
+          "match": "\\b(true|false|null|undefined|NaN|Infinity)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.humal",
+          "match": "\\b(?:0[xX][0-9a-fA-F]+|0[bB][01]+|0[oO][0-7]+|(?:\\d+\\.\\d*|\\.\\d+|\\d+)(?:[eE][+-]?\\d+)?)\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.humal",
+          "match": "===|!==|==|!=|>=|<=|=>|&&|\\|\\||\\+\\+|--|\\+=|-=|\\*=|/=|\\*\\*|[=+\\-*/%<>!&|?:.]"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.humal",
+          "match": "\\b[A-Za-z_$][\\w$]*(?=\\s*\\()"
+        }
+      ]
+    }
+  }
+}

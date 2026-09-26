@@ -1,0 +1,30 @@
+{
+  "name": "Humal Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0b1020",
+    "editor.foreground": "#dbe4ff",
+    "editorLineNumber.foreground": "#53607a",
+    "editorLineNumber.activeForeground": "#a8b5d6"
+  },
+  "tokenColors": [
+    { "scope": "comment.line.double-slash.humal", "settings": { "foreground": "#6b7280", "fontStyle": "italic" } },
+    { "scope": "string.quoted.double.humal", "settings": { "foreground": "#f7c873" } },
+    { "scope": "string.quoted.single.humal", "settings": { "foreground": "#f7c873" } },
+    { "scope": "string.quoted.other.humal", "settings": { "foreground": "#f7c873" } },
+    { "scope": "constant.numeric.humal", "settings": { "foreground": "#b8a1ff" } },
+    { "scope": "constant.language.humal", "settings": { "foreground": "#ff8fb3" } },
+    { "scope": "keyword.declaration.humal", "settings": { "foreground": "#ff7ab2", "fontStyle": "bold" } },
+    { "scope": "keyword.control.conditional.humal", "settings": { "foreground": "#ff9f43", "fontStyle": "bold" } },
+    { "scope": "keyword.control.loop.humal", "settings": { "foreground": "#35d07f", "fontStyle": "bold" } },
+    { "scope": "keyword.control.async.humal", "settings": { "foreground": "#58a6ff", "fontStyle": "bold" } },
+    { "scope": "keyword.control.flow.humal", "settings": { "foreground": "#e5c07b", "fontStyle": "bold" } },
+    { "scope": "keyword.module.humal", "settings": { "foreground": "#c678dd", "fontStyle": "bold" } },
+    { "scope": "keyword.operator.word.humal", "settings": { "foreground": "#56b6c2", "fontStyle": "bold" } },
+    { "scope": "keyword.other.humal", "settings": { "foreground": "#61afef", "fontStyle": "bold" } },
+    { "scope": "support.function.humal", "settings": { "foreground": "#98c379", "fontStyle": "bold" } },
+    { "scope": "support.function.builtin.humal", "settings": { "foreground": "#7fd1b9" } },
+    { "scope": "entity.name.function.humal", "settings": { "foreground": "#82aaff" } },
+    { "scope": "keyword.operator.humal", "settings": { "foreground": "#89ddff" } }
+  ]
+}

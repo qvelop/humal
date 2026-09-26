@@ -1,0 +1,12 @@
+let express = require("express")
+
+let app = express()
+
+fn home(req, res)
+    res.send("Hello from Humal!")
+
+app.get("/", home)
+
+app.listen(3000)
+
+// test curl http://localhost:3000

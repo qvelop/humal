@@ -1,0 +1,10 @@
+{
+  "iconDefinitions": {
+    "_humal": {
+      "iconPath": "./../images/humal-file.svg"
+    }
+  },
+  "fileExtensions": {
+    "hum": "_humal"
+  }
+}
