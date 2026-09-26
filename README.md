@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/image/humal-logo.png" alt="Humal" width="60%">
+  <img src="./assets/image/humal-logo.png" alt="Humal" width="55%">
 </p>
 
 # Humal
