@@ -21,7 +21,7 @@ Download the `.vsix` file, then in VS Code go to the **Extensions** view, click 
 ## Install
 
 ```bash
-npm install -g humal
+npm install -g @qvelop444/humal
 ```
 
 ## Usage
