@@ -2,7 +2,7 @@
   "name": "humal-language",
   "displayName": "Humal Language",
   "description": "Humal language support for VS Code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "humal-language",
   "license": "MIT",
   "icon": "./images/humal.png",

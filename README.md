@@ -159,3 +159,14 @@ let user = input "What is your name? "
 
 print "Hello " + user
 ```
+
+### destructuring
+
+```bash
+let user = { name: "Bob", age: 25 }
+
+let { name, age } = user
+
+print name
+print age
+```

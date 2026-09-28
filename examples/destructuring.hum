@@ -1,0 +1,6 @@
+let user = { name: "Bob", age: 25 }
+
+let { name, age } = user
+
+print name
+print age
