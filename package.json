@@ -39,7 +39,7 @@
     "type": "git",
     "url": "git+https://github.com/qvelop/humal.git"
   },
-  "homepage": "https://github.com/qvelop/humal#readme",
+  "homepage": "https://humal.netlify.app",
   "bugs": {
     "url": "https://github.com/qvelop/humal/issues"
   },
