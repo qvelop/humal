@@ -9,7 +9,7 @@ Humal is a programming language with human-readable syntax that uses indentation
 Humal does not add new semantics. It removes the punctuation you don't need:
 no `{}`, no `;`, no `:` after conditions. Everything else is JavaScript.
 
-In basic Humal syntax, square and round brackets are optional meaning they can be used or omitted. However, they are required to a minimal extent in complex functions, specific methods, and library calls. **Humal does not aim to replace JavaScript; instead, it seeks to make the syntax cleaner, more elegant, and easier to read and understand.**
+In Humal's basic syntax, the use of curly and round brackets is optional—they can be included or omitted. However, a minimal amount of them is required when working with complex functions, specific methods, and library calls. **Humal does not aim to replace JavaScript; instead, the language is designed to make the syntax cleaner, more elegant, and easier to read and understand.**
 
 ## How it works
 
