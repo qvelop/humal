@@ -9,6 +9,8 @@ Humal is a programming language with human-readable syntax that uses indentation
 Humal does not add new semantics. It removes the punctuation you don't need:
 no `{}`, no `;`, no `:` after conditions. Everything else is JavaScript.
 
+In basic Humal syntax, square and round brackets are optional meaning they can be used or omitted. However, they are required to a minimal extent in complex functions, specific methods, and library calls. **Humal does not aim to replace JavaScript; instead, it seeks to make the syntax cleaner, more elegant, and easier to read and understand.**
+
 ## How it works
 
 No AST, no parser. String literals and comments are left untouched, so a
@@ -56,7 +58,6 @@ print "Hello World!"
 let name = "Bob"
 let age = 25
 let city = "Warsaw"
-
 
 print name
 print age
