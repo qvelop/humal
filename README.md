@@ -15,6 +15,8 @@ In Humal's basic syntax, the use of curly and round brackets is optional they ca
 
 No AST, no parser, no braces for blocks, no semicolons, no colons after control statements. String literals and comments are left untouched, so a keyword inside a string stays a string
 
+The core idea is simple. Humal retains familiar JavaScript syntax but removes unnecessary punctuation and uses indentation to define code blocks, resulting in cleaner code that is easier to learn and understand.
+
 ## Install the VS Code extension
 
 Download the `.vsix` file, then in VS Code go to the **Extensions** view, click the **three dots**, select **Install from VSIX...**, and choose the downloaded `.vsix` file.
