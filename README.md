@@ -11,6 +11,8 @@ no `{}`, no `;`, no `:` after conditions. Everything else is JavaScript.
 
 In Humal's basic syntax, the use of curly and round brackets is optional they can be included or omitted. However, a minimal amount of them is required when working with complex functions, specific methods, and library calls. **Humal does not aim to replace JavaScript; instead, the language is designed to make the syntax cleaner, more elegant, and easier to read and understand.**
 
+In basic Humal syntax, square and round brackets are optional meaning they can be used or omitted. However, they are required to a minimal extent in complex functions, specific methods, and library calls. **Humal does not aim to replace JavaScript; instead, it seeks to make the syntax cleaner, more elegant, and easier to read and understand.**
+
 ## How it works
 
 No AST, no parser, no braces for blocks, no semicolons, no colons after control statements. String literals and comments are left untouched, so a keyword inside a string stays a string
@@ -23,29 +25,95 @@ Download the `.vsix` file, then in VS Code go to the **Extensions** view, click 
 
 ## Install
 
+Install Humal globally:
+
 ```bash
 npm install -g @qvelop444/humal
 ```
 
-## Usage
+You can also install Humal locally in a project:
 
-Run a Humal file:
+```bash
+npm install --save-dev @qvelop444/humal
+```
+
+## Create a Humal Project
+
+Create a new Humal project:
+
+```bash
+humal init my-app
+cd my-app
+npm install
+```
+Start the development environment:
+
+```bash
+humal dev
+```
+
+This creates a basic project structure:
+
+```text
+my-app/
+├── src/
+│   └── main.hum
+├── humal.config.json
+├── package.json
+└── .gitignore
+```
+
+## CLI Commands
+
+Run a Humal file directly:
 
 ```bash
 humal test.hum
 ```
 
-Build the Humal file into the CommonJS standard:
+Use CommonJS:
 
 ```bash
 humal build test.hum --cjs
 ```
 
-Build the Humal file into the ESM standard
+Use ESM:
 
 ```bash
 humal build test.hum --esm
 ```
+
+Check your Humal project with TypeScript and ESLint:
+
+```bash
+humal check
+```
+
+Build the project:
+
+```bash
+humal build
+```
+
+Watch Humal files for changes:
+
+```bash
+humal watch
+```
+
+Start development mode with automatic rebuilding and restarting:
+
+```bash
+humal dev
+```
+
+Format Humal files:
+
+```bash
+humal fmt
+```
+
+When no module format is specified, Humal can detect the format from the source code.
 
 ## Basic Syntax
 

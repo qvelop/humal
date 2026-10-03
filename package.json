@@ -1,6 +1,6 @@
 {
   "name": "@qvelop444/humal",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Humal is a programming language with human-readable syntax that uses indentation like Python and compiles directly to JavaScript, supporting both ESM and CommonJS.",
   "bin": {
     "humal": "bin/humal.js"
@@ -46,7 +46,17 @@
     "url": "https://github.com/qvelop/humal/issues"
   },
   "dependencies": {
-    "readline-sync": "^1.4.10"
+    "@babel/generator": "^8.0.6",
+    "@babel/parser": "^7.29.9",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.3",
+    "@types/readline-sync": "^1.4.8",
+    "chokidar": "^4.0.3",
+    "eslint": "^10.11.0",
+    "express": "^5.2.1",
+    "prettier": "^3.9.9",
+    "readline-sync": "^1.4.10",
+    "typescript": "^7.0.2"
   },
   "publishConfig": {
     "access": "public"

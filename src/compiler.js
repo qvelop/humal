@@ -651,8 +651,27 @@ function compile(src, fmt, options) {
     throw error('Unterminated string', src, lexerState.stringStart);
   }
 
+  var inDocComment = false;
   for (n = 0; n < rows.length; n++) {
     raw = rows[n];
+    if (inDocComment) {
+      emit(raw, n + 1);
+      if (raw.indexOf('*/') !== -1) {
+        inDocComment = false;
+      }
+      base += raw.length + 1;
+      continue;
+    }
+    if (/^\s*\/\*\*/.test(raw)) {
+      emit(raw, n + 1);
+      var docStart = raw.indexOf('/**');
+      var docEnd = raw.indexOf('*/', docStart + 3);
+      if (docEnd === -1) {
+        inDocComment = true;
+      }
+      base += raw.length + 1;
+      continue;
+    }
     trimmed = raw.trim();
 
     if (!trimmed) {

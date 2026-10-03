@@ -8,5 +8,5 @@ fn home(req, res)
 app.get("/", home)
 
 app.listen(3000)
-
-// test curl http://localhost:3000
+print "Humal Server Started!"
+print "test: curl http://localhost:3000"
