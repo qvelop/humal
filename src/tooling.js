@@ -7,6 +7,13 @@ var tsDir = path.dirname(path.dirname(require.resolve('typescript')));
 var eslintDir = path.dirname(path.dirname(require.resolve('eslint')));
 var prettierDir = path.dirname(require.resolve('prettier'));
 
+var humalRoot = path.resolve(__dirname, '..');
+var humalTypesRoot = path.join(
+  humalRoot,
+  'node_modules',
+  '@types'
+);
+
 var TSC = path.join(tsDir, 'bin', 'tsc');
 var ESLINT = path.join(eslintDir, 'bin', 'eslint.js');
 var PRETTIER = path.join(prettierDir, 'bin', 'prettier.cjs');
@@ -63,21 +70,23 @@ function checkTypes(code, sourceFile, moduleFormat) {
   var temp = createTempFile(sourceFile, moduleFormat, code);
 
   try {
-    var r = run(
-      TSC,
-      [
-        '--allowJs', '--checkJs', '--noEmit', '--strict',
-        '--noImplicitAny', 'false', '--skipLibCheck',
-        '--target', 'ES2022',
-        '--module', 'NodeNext',
-        '--moduleResolution', 'NodeNext',
-        '--esModuleInterop',
-        '--types', 'node',
-        '--pretty', 'false',
-        temp
-      ],
-      path.dirname(sourceFile)
-    );
+  var r = run(
+    TSC,
+    [
+      '--allowJs', '--checkJs', '--noEmit', '--strict',
+      '--noImplicitAny', 'false', '--skipLibCheck',
+      '--target', 'ES2022',
+      '--module', 'NodeNext',
+      '--moduleResolution', 'NodeNext',
+      '--esModuleInterop',
+      '--typeRoots',
+      humalTypesRoot,
+      '--types', 'node',
+      '--pretty', 'false',
+      temp
+    ],
+    path.dirname(sourceFile)
+  );
 
     if (r.status !== 0) fail('TypeScript validation', r);
   } finally {
