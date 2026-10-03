@@ -47,8 +47,6 @@
     "url": "https://github.com/qvelop/humal/issues"
   },
   "dependencies": {
-    "@babel/generator": "^8.0.6",
-    "@babel/parser": "^7.29.9",
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.3",
     "@types/readline-sync": "^1.4.8",
