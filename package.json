@@ -29,7 +29,8 @@
     "examples",
     "assets/image/humal-logo.png",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "eslint.config.cjs"
   ],
   "author": {
     "name": "qvelop",
