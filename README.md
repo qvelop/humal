@@ -240,3 +240,5 @@ let { name, age } = user
 print name
 print age
 ```
+
+More code examples and full documentation can be found on the official website: https://humal.netlify.app
