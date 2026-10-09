@@ -240,10 +240,6 @@ let { name, age } = user
 print name
 print age
 ```
-<<<<<<< HEAD
-
-More code examples and full documentation can be found on the official website: https://humal.netlify.app
-=======
 ### Basic switch
 ```bash
 let value = 2
@@ -288,4 +284,3 @@ switch value
 ```
 
 More code examples and full documentation can be found on the official website: https://humal.netlify.app
->>>>>>> 27e8206 (Release Humal 1.3.0)
