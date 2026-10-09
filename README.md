@@ -240,5 +240,52 @@ let { name, age } = user
 print name
 print age
 ```
+<<<<<<< HEAD
 
 More code examples and full documentation can be found on the official website: https://humal.netlify.app
+=======
+### Basic switch
+```bash
+let value = 2
+
+switch value
+    case 1
+        print "one"
+        break
+
+    case 2
+        print "two"
+        break
+
+    default
+        print "other"
+```
+### Multiple case labels
+```bash
+let value = 2
+
+switch value
+    case 1
+    case 2
+    case 3
+        print "one, two or three"
+        break
+
+    default
+        print "other"
+```
+### Expressions in case
+```bash
+let value = 10
+
+switch value
+    case 5 + 5
+        print "expression works"
+        break
+
+    default
+        print "no match"
+```
+
+More code examples and full documentation can be found on the official website: https://humal.netlify.app
+>>>>>>> 27e8206 (Release Humal 1.3.0)

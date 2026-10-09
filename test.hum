@@ -1,1 +1,9 @@
-print "Hello World!"
+let value = 10
+
+switch value
+    case 5 + 5
+        print "expression works"
+        break
+
+    default
+        print "no match"

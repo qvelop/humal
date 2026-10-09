@@ -5,127 +5,234 @@
   "patterns": [
     { "include": "#comments" },
     { "include": "#strings" },
+    { "include": "#class-declarations" },
+    { "include": "#function-declarations" },
+    { "include": "#variable-declarations" },
     { "include": "#keywords" },
     { "include": "#builtins" },
     { "include": "#constants" },
     { "include": "#numbers" },
-    { "include": "#operators" },
-    { "include": "#functions" }
+    { "include": "#functions" },
+    { "include": "#properties" },
+    { "include": "#variables" },
+    { "include": "#operators" }
   ],
   "repository": {
     "comments": {
       "patterns": [
         {
-          "name": "comment.line.double-slash.humal",
+          "name": "comment.line.double-slash",
           "match": "//.*$"
         }
       ]
     },
+
     "strings": {
       "patterns": [
         {
-          "name": "string.quoted.double.humal",
+          "name": "string.quoted.double",
           "begin": "\"",
           "end": "\"",
           "patterns": [
-            { "name": "constant.character.escape.humal", "match": "\\\\." }
+            {
+              "name": "constant.character.escape",
+              "match": "\\\\(?:[nrtbfv0'\"\\\\]|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4})"
+            }
           ]
         },
         {
-          "name": "string.quoted.single.humal",
+          "name": "string.quoted.single",
           "begin": "'",
           "end": "'",
           "patterns": [
-            { "name": "constant.character.escape.humal", "match": "\\\\." }
+            {
+              "name": "constant.character.escape",
+              "match": "\\\\(?:[nrtbfv0'\"\\\\]|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4})"
+            }
           ]
         },
         {
-          "name": "string.quoted.other.humal",
+          "name": "string.quoted.other",
           "begin": "`",
           "end": "`",
           "patterns": [
-            { "name": "constant.character.escape.humal", "match": "\\\\." }
+            {
+              "name": "constant.character.escape",
+              "match": "\\\\(?:[nrtbfv0'\"\\\\]|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4})"
+            }
           ]
         }
       ]
     },
+
+    "class-declarations": {
+      "patterns": [
+        {
+          "name": "meta.class.humal",
+          "match": "\\b(class)\\s+([A-Za-z_$][\\w$]*)",
+          "captures": {
+            "1": { "name": "storage.type.class" },
+            "2": { "name": "entity.name.type.class" }
+          }
+        },
+        {
+          "name": "storage.modifier.extends",
+          "match": "\\bextends\\b"
+        },
+        {
+          "name": "storage.modifier",
+          "match": "\\bstatic\\b"
+        }
+      ]
+    },
+
+    "function-declarations": {
+      "patterns": [
+        {
+          "name": "meta.function.humal",
+          "match": "\\b(fn)\\s+([A-Za-z_$][\\w$]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "storage.type.function" },
+            "2": { "name": "entity.name.function" }
+          }
+        },
+        {
+          "name": "meta.function.async.humal",
+          "match": "\\b(async)\\s+(fn)\\s+([A-Za-z_$][\\w$]*)\\s*(?=\\()",
+          "captures": {
+            "1": { "name": "storage.modifier.async" },
+            "2": { "name": "storage.type.function" },
+            "3": { "name": "entity.name.function" }
+          }
+        }
+      ]
+    },
+
+    "variable-declarations": {
+      "patterns": [
+        {
+          "name": "meta.variable.declaration.humal",
+          "match": "\\b(let|const|var)\\s+([A-Za-z_$][\\w$]*)",
+          "captures": {
+            "1": { "name": "storage.type" },
+            "2": { "name": "variable.other.readwrite" }
+          }
+        }
+      ]
+    },
+
     "keywords": {
       "patterns": [
         {
-          "name": "keyword.declaration.humal",
-          "match": "\\b(let|const|var|fn|class|extends|static)\\b"
-        },
-        {
-          "name": "keyword.control.conditional.humal",
+          "name": "keyword.control.conditional",
           "match": "\\b(if|else|elif|switch|case|default)\\b"
         },
         {
-          "name": "keyword.control.loop.humal",
-          "match": "\\b(for|while|do|break|continue|in|of)\\b"
+          "name": "keyword.control.loop",
+          "match": "\\b(for|while|do|break|continue)\\b"
         },
         {
-          "name": "keyword.control.async.humal",
+          "name": "keyword.control.flow",
+          "match": "\\b(return|throw|try|catch|finally)\\b"
+        },
+        {
+          "name": "keyword.control.async",
           "match": "\\b(async|await|yield)\\b"
         },
         {
-          "name": "keyword.control.flow.humal",
-          "match": "\\b(return|throw|try|catch|finally|new|delete)\\b"
-        },
-        {
-          "name": "keyword.module.humal",
+          "name": "keyword.control.import",
           "match": "\\b(import|export|from|as)\\b"
         },
         {
-          "name": "keyword.operator.word.humal",
-          "match": "\\b(typeof|instanceof|void)\\b"
+          "name": "keyword.operator.word",
+          "match": "\\b(typeof|instanceof|void|in|of)\\b"
         },
         {
-          "name": "keyword.other.humal",
-          "match": "\\b(get|set|this|super|with|debugger)\\b"
+          "name": "keyword.operator",
+          "match": "\\b(delete)\\b"
+        },
+        {
+          "name": "variable.language",
+          "match": "\\b(this|super)\\b"
+        },
+        {
+          "name": "keyword.other",
+          "match": "\\b(get|set|with|debugger)\\b"
         }
       ]
     },
+
     "builtins": {
       "patterns": [
         {
-          "name": "support.function.humal",
+          "name": "support.function.builtin",
           "match": "\\b(print|input|require)\\b"
         },
         {
-          "name": "support.function.builtin.humal",
-          "match": "\\b(parseInt|parseFloat|Number|String|Boolean|Array|Object|Math|JSON|Date|Promise|console)\\b"
+          "name": "support.function",
+          "match": "\\b(parseInt|parseFloat)\\b"
+        },
+        {
+          "name": "support.type",
+          "match": "\\b(Number|String|Boolean|Array|Object|Math|JSON|Date|Promise)\\b"
+        },
+        {
+          "name": "support.variable",
+          "match": "\\b(console)\\b"
         }
       ]
     },
+
     "constants": {
       "patterns": [
         {
-          "name": "constant.language.humal",
+          "name": "constant.language",
           "match": "\\b(true|false|null|undefined|NaN|Infinity)\\b"
         }
       ]
     },
+
     "numbers": {
       "patterns": [
         {
-          "name": "constant.numeric.humal",
-          "match": "\\b(?:0[xX][0-9a-fA-F]+|0[bB][01]+|0[oO][0-7]+|(?:\\d+\\.\\d*|\\.\\d+|\\d+)(?:[eE][+-]?\\d+)?)\\b"
+          "name": "constant.numeric",
+          "match": "(?<![A-Za-z_$\\d])(?:0[xX][0-9A-Fa-f]+|0[bB][01]+|0[oO][0-7]+|(?:\\d+\\.\\d*|\\.\\d+|\\d+)(?:[eE][+-]?\\d+)?)(?![A-Za-z_$\\d])"
         }
       ]
     },
-    "operators": {
-      "patterns": [
-        {
-          "name": "keyword.operator.humal",
-          "match": "===|!==|==|!=|>=|<=|=>|&&|\\|\\||\\+\\+|--|\\+=|-=|\\*=|/=|\\*\\*|[=+\\-*/%<>!&|?:.]"
-        }
-      ]
-    },
+
     "functions": {
       "patterns": [
         {
-          "name": "entity.name.function.humal",
+          "name": "entity.name.function",
           "match": "\\b[A-Za-z_$][\\w$]*(?=\\s*\\()"
+        }
+      ]
+    },
+
+    "properties": {
+      "patterns": [
+        {
+          "name": "variable.other.property",
+          "match": "(?<=\\.)[A-Za-z_$][\\w$]*"
+        }
+      ]
+    },
+
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other",
+          "match": "\\b[A-Za-z_$][\\w$]*\\b"
+        }
+      ]
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator",
+          "match": "===|!==|==|!=|>=|<=|=>|&&|\\|\\||\\+\\+|--|\\+=|-=|\\*=|/=|\\*\\*|%=|\\*|/|%|\\+|-|=|<|>|!|&|\\||\\?|:|\\."
         }
       ]
     }

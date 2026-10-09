@@ -2,9 +2,9 @@
   "name": "humal-language",
   "displayName": "Humal Language",
   "description": "Humal language support for VS Code",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "publisher": "humal-language",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "icon": "./images/humal.png",
   "engines": {
     "vscode": ">=1.85.0"
@@ -24,6 +24,14 @@
   "activationEvents": [
     "onLanguage:humal"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qvelop/humal.git"
+  },
+  "homepage": "https://humal.netlify.app",
+  "bugs": {
+    "url": "https://github.com/qvelop/humal/issues"
+  },
 "contributes": {
   "configurationDefaults": {
     "[humal]": {
@@ -59,13 +67,6 @@
       {
         "language": "humal",
         "path": "./snippets/humal.json"
-      }
-    ],
-    "themes": [
-      {
-        "label": "Humal Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/humal-color-theme.json"
       }
     ],
     "iconThemes": [

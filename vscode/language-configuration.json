@@ -1,20 +1,43 @@
 {
+  "$schema": "vscode://schemas/language-configuration",
   "comments": {
     "lineComment": "//"
   },
-  "brackets": [],
-  "autoClosingBrackets": [],
-  "autoClosingQuotes": ["\"", "'", "`"],
+  "brackets": [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"]
+  ],
+  "autoClosingPairs": [
+    { "open": "(", "close": ")" },
+    { "open": "[", "close": "]" },
+    { "open": "{", "close": "}" },
+    { "open": "\"", "close": "\"", "notIn": ["string", "comment"] },
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+    { "open": "`", "close": "`", "notIn": ["string", "comment"] }
+  ],
   "surroundingPairs": [
+    ["(", ")"],
+    ["[", "]"],
+    ["{", "}"],
     ["\"", "\""],
     ["'", "'"],
-    ["`", "`"],
-    ["(", ")"],
-    ["[", "]"]
+    ["`", "`"]
   ],
   "indentationRules": {
-    "increaseIndentPattern": "^(\\s*)(if|elif|else|while|for|function|async)\\b.*$",
-    "decreaseIndentPattern": "^\\s*(else|elif)\\b.*$"
+    "increaseIndentPattern": "^\\s*(?:if|elif|else|while|for|try|catch|finally|fn|async\\s+fn|switch|case|default)\\b.*$",
+    "decreaseIndentPattern": "^\\s*(?:else|elif|catch|finally|case|default)\\b.*$",
+    "indentNextLinePattern": "^\\s*(?:if|elif|else|while|for|try|catch|finally|fn|async\\s+fn|switch|case|default)\\b.*$"
   },
+  "onEnterRules": [
+    {
+      "beforeText": "^\\s*(?:if|elif|else|while|for|try|catch|finally|fn|async\\s+fn|switch|case|default)\\b.*$",
+      "action": { "indent": "indent" }
+    },
+    {
+      "beforeText": "^\\s*(?:else|elif|catch|finally|case|default)\\b.*$",
+      "action": { "indent": "outdent" }
+    }
+  ],
   "wordPattern": "(-?\\d+(\\.\\d+)?)|([A-Za-z_$][\\w$]*)"
 }

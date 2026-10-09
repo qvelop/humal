@@ -314,6 +314,18 @@ function parseStatement(s) {
         return { kind: 'raw', text: s };
       }
       return { kind: 'finally' };
+    case 'switch': {
+      var switchExpr = condition(s.slice(skipSpace(s, pos)));
+      return { kind: 'switch', expr: switchExpr };
+    }
+    case 'case': {
+      var caseExpr = s.slice(skipSpace(s, pos)).trim();
+      return { kind: 'case', expr: caseExpr };
+    }
+    case 'default': {
+      var defaultRest = s.slice(skipSpace(s, pos)).trim();
+      return { kind: 'default', rest: defaultRest };
+    }
     case 'print': {
       var printPos = skipSpace(s, pos);
       var value = s.slice(printPos).trim();
@@ -687,14 +699,29 @@ function compile(src, fmt, options) {
 
     indentTracker.feed(indent, prevBlock, src, base);
 
-    branch = /^(else|elif|catch|finally)\b/.test(trimmed);
+    branch = /^(else|elif|catch|finally|case|default)\b/.test(trimmed);
 
-    while (stack.length && (indent < stack[stack.length - 1].indent || (!branch && indent === stack[stack.length - 1].indent))) {
+    while (
+      stack.length &&
+      (
+        indent < stack[stack.length - 1].indent ||
+        (!branch && indent === stack[stack.length - 1].indent)
+      )
+    ) {
       top = stack[stack.length - 1];
-      if (top.bodyIndent == null) {
+
+      if (
+        top.bodyIndent == null &&
+        top.type !== 'case' &&
+        top.type !== 'default'
+      ) {
         throw error('Expected an indented block', src, base);
       }
-      emit(new Array(stack.length).join('  ') + '}', n + 1);
+
+      if (top.type !== 'case' && top.type !== 'default') {
+        emit(new Array(stack.length).join('  ') + '}', n + 1);
+      }
+
       stack.pop();
     }
 
@@ -816,6 +843,70 @@ function compile(src, fmt, options) {
         top.bodyIndent = null;
         break;
 
+      case 'switch':
+        if (!stmt.expr) {
+          throw error('switch requires an expression', src, base);
+        }
+        emit(pad + 'switch (' + stmt.expr + ') {', n + 1);
+        stack.push({ type: 'switch', indent: indent, bodyIndent: null });
+        break;
+
+      case 'case': {
+        if (!stmt.expr) {
+          throw error('case requires an expression', src, base);
+        }
+        top = stack[stack.length - 1];
+        if (!top) {
+          throw error('case without matching switch', src, base);
+        }
+        if (top.type === 'switch') {
+          if (indent <= top.indent) {
+            throw error('case must be inside switch', src, base);
+          }
+          emit(pad + 'case ' + stmt.expr + ':', n + 1);
+          stack.push({ type: 'case', indent: indent, bodyIndent: null });
+          break;
+        }
+        if (top.type === 'case' || top.type === 'default') {
+          if (top.indent !== indent) {
+            throw error('case has invalid indentation', src, base);
+          }
+          emit(pad + 'case ' + stmt.expr + ':', n + 1);
+          top.type = 'case';
+          top.bodyIndent = null;
+          break;
+        }
+        throw error('case without matching switch', src, base);
+      }
+
+      case 'default': {
+        if (stmt.rest) {
+          throw error('default cannot have a value', src, base);
+        }
+        top = stack[stack.length - 1];
+        if (!top) {
+          throw error('default without matching switch', src, base);
+        }
+        if (top.type === 'switch') {
+          if (indent <= top.indent) {
+            throw error('default must be inside switch', src, base);
+          }
+          emit(pad + 'default:', n + 1);
+          stack.push({ type: 'default', indent: indent, bodyIndent: null });
+          break;
+        }
+        if (top.type === 'case' || top.type === 'default') {
+          if (top.indent !== indent) {
+            throw error('default has invalid indentation', src, base);
+          }
+          emit(pad + 'default:', n + 1);
+          top.type = 'default';
+          top.bodyIndent = null;
+          break;
+        }
+        throw error('default without matching switch', src, base);
+      }
+
       case 'print':
         emit(stmt.expr ? pad + 'console.log(' + stmt.expr + ')' : pad + 'console.log()', n + 1);
         break;
@@ -835,17 +926,26 @@ function compile(src, fmt, options) {
       stmt.kind === 'async_fn' ||
       stmt.kind === 'try' ||
       stmt.kind === 'catch' ||
-      stmt.kind === 'finally';
+      stmt.kind === 'finally' ||
+      stmt.kind === 'switch' ||
+      stmt.kind === 'case' ||
+      stmt.kind === 'default';
 
     base += raw.length + 1;
   }
 
   while (stack.length) {
     top = stack[stack.length - 1];
-    if (top.bodyIndent == null) {
+    if (
+      top.bodyIndent == null &&
+      top.type !== 'case' &&
+      top.type !== 'default'
+    ) {
       throw error('Expected an indented block', src, src.length);
     }
-    emit(new Array(stack.length).join('  ') + '}', rows.length);
+    if (top.type !== 'case' && top.type !== 'default') {
+      emit(new Array(stack.length).join('  ') + '}', rows.length);
+    }
     stack.pop();
   }
 

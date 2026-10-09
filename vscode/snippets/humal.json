@@ -1,12 +1,13 @@
 {
-  "if block": {
+  "if": {
     "prefix": "if",
     "body": [
       "if ${1:condition}",
       "\t${0:print \"yes\"}"
     ],
-    "description": "Humal if block"
+    "description": "If statement"
   },
+
   "if else": {
     "prefix": "ifelse",
     "body": [
@@ -15,53 +16,364 @@
       "else",
       "\t${0:print \"no\"}"
     ],
-    "description": "Humal if/else block"
+    "description": "If/else statement"
   },
-  "elif": {
-    "prefix": "elif",
+
+  "if elif": {
+    "prefix": "ifelif",
     "body": [
-      "elif ${1:condition}",
-      "\t${0:print \"...\"}"
+      "if ${1:condition}",
+      "\t${2:print \"first\"}",
+      "elif ${3:condition}",
+      "\t${4:print \"second\"}",
+      "${0}"
     ],
-    "description": "Humal elif block"
+    "description": "If/elif statement"
   },
+
+  "if elif else": {
+    "prefix": "ifelifelse",
+    "body": [
+      "if ${1:condition}",
+      "\t${2:print \"first\"}",
+      "elif ${3:condition}",
+      "\t${4:print \"second\"}",
+      "else",
+      "\t${0:print \"other\"}"
+    ],
+    "description": "If/elif/else statement"
+  },
+
   "while": {
     "prefix": "while",
     "body": [
       "while ${1:condition}",
       "\t${0:print \"...\"}"
     ],
-    "description": "Humal while block"
+    "description": "While loop"
   },
+
+  "while break": {
+    "prefix": "whilebreak",
+    "body": [
+      "while ${1:true}",
+      "\tif ${2:condition}",
+      "\t\tbreak",
+      "\t${0:print \"...\"}"
+    ],
+    "description": "While loop with break"
+  },
+
   "for in": {
-    "prefix": "for",
+    "prefix": "forin",
     "body": [
       "for ${1:item} in ${2:items}",
       "\t${0:print item}"
     ],
-    "description": "Humal for-in loop"
+    "description": "For-in loop"
   },
+
+  "for in if": {
+    "prefix": "forif",
+    "body": [
+      "for ${1:item} in ${2:items}",
+      "\tif ${3:condition}",
+      "\t\t${0:print item}"
+    ],
+    "description": "For-in loop with condition"
+  },
+
+  "for in continue": {
+    "prefix": "forcontinue",
+    "body": [
+      "for ${1:item} in ${2:items}",
+      "\tif ${3:condition}",
+      "\t\tcontinue",
+      "\t${0:print item}"
+    ],
+    "description": "For-in loop with continue"
+  },
+
   "function": {
     "prefix": "fn",
     "body": [
       "fn ${1:name}(${2:args})",
       "\t${0:print \"...\"}"
     ],
-    "description": "Humal function"
+    "description": "Function declaration"
   },
+
+  "function return": {
+    "prefix": "fnreturn",
+    "body": [
+      "fn ${1:name}(${2:args})",
+      "\treturn ${0:value}"
+    ],
+    "description": "Function with return"
+  },
+
+  "async function": {
+    "prefix": "asyncfn",
+    "body": [
+      "async fn ${1:name}(${2:args})",
+      "\t${0:await something()}"
+    ],
+    "description": "Async function declaration"
+  },
+
+  "async function return": {
+    "prefix": "asyncreturn",
+    "body": [
+      "async fn ${1:name}(${2:args})",
+      "\treturn ${0:value}"
+    ],
+    "description": "Async function with return"
+  },
+
+  "try": {
+    "prefix": "try",
+    "body": [
+      "try",
+      "\t${0:print \"...\"}"
+    ],
+    "description": "Try block"
+  },
+
+  "try catch": {
+    "prefix": "trycatch",
+    "body": [
+      "try",
+      "\t${1:print \"...\"}",
+      "catch ${2:error}",
+      "\t${0:print error}"
+    ],
+    "description": "Try/catch block"
+  },
+
+  "try catch finally": {
+    "prefix": "trycatchfinally",
+    "body": [
+      "try",
+      "\t${1:print \"...\"}",
+      "catch ${2:error}",
+      "\t${3:print error}",
+      "finally",
+      "\t${0:print \"done\"}"
+    ],
+    "description": "Try/catch/finally block"
+  },
+
+  "catch": {
+    "prefix": "catch",
+    "body": [
+      "catch ${1:error}",
+      "\t${0:print error}"
+    ],
+    "description": "Catch block"
+  },
+
+  "finally": {
+    "prefix": "finally",
+    "body": [
+      "finally",
+      "\t${0:print \"done\"}"
+    ],
+    "description": "Finally block"
+  },
+
+  "print": {
+    "prefix": "print",
+    "body": [
+      "print ${0:\"Hello, world!\"}"
+    ],
+    "description": "Print value"
+  },
+
+  "print expression": {
+    "prefix": "println",
+    "body": [
+      "print ${0:expression}"
+    ],
+    "description": "Print expression"
+  },
+
   "input": {
     "prefix": "input",
     "body": [
-      "input \"${1:Prompt: }\""
+      "let ${1:user} = input \"${2:What is your name? }\""
     ],
-    "description": "Humal input"
+    "description": "Read user input"
   },
-  "async function": {
-    "prefix": "async",
+
+  "input bare": {
+    "prefix": "inputvar",
     "body": [
-      "async function ${1:name}(${2:args})",
-      "\t${0:await something()}"
+      "let ${1:value} = input \"${2:Enter a value: }\""
     ],
-    "description": "Async Humal function"
+    "description": "Read input into a variable"
+  },
+
+  "let": {
+    "prefix": "let",
+    "body": [
+      "let ${1:name} = ${0:value}"
+    ],
+    "description": "Variable declaration"
+  },
+
+  "const": {
+    "prefix": "const",
+    "body": [
+      "const ${1:name} = ${0:value}"
+    ],
+    "description": "Constant declaration"
+  },
+
+  "var": {
+    "prefix": "var",
+    "body": [
+      "var ${1:name} = ${0:value}"
+    ],
+    "description": "Variable declaration"
+  },
+
+  "return": {
+    "prefix": "return",
+    "body": [
+      "return ${0:value}"
+    ],
+    "description": "Return statement"
+  },
+
+  "throw": {
+    "prefix": "throw",
+    "body": [
+      "throw new Error(${0:\"Something went wrong\"})"
+    ],
+    "description": "Throw an error"
+  },
+
+  "break": {
+    "prefix": "break",
+    "body": [
+      "break"
+    ],
+    "description": "Break loop"
+  },
+
+  "continue": {
+    "prefix": "continue",
+    "body": [
+      "continue"
+    ],
+    "description": "Continue loop"
+  },
+
+  "increment": {
+    "prefix": "inc",
+    "body": [
+      "${1:value}++"
+    ],
+    "description": "Increment value"
+  },
+
+  "decrement": {
+    "prefix": "dec",
+    "body": [
+      "${1:value}--"
+    ],
+    "description": "Decrement value"
+  },
+
+  "function call": {
+    "prefix": "call",
+    "body": [
+      "${1:name}(${0:args})"
+    ],
+    "description": "Function call"
+  },
+
+  "import default": {
+    "prefix": "import",
+    "body": [
+      "import ${1:name} from \"${2:module}\""
+    ],
+    "description": "Default import"
+  },
+
+  "import namespace": {
+    "prefix": "import*",
+    "body": [
+      "import * as ${1:name} from \"${2:module}\""
+    ],
+    "description": "Namespace import"
+  },
+
+  "import named": {
+    "prefix": "import{}",
+    "body": [
+      "import { ${1:name} } from \"${2:module}\""
+    ],
+    "description": "Named import"
+  },
+
+  "export default": {
+    "prefix": "exportdefault",
+    "body": [
+      "export default ${0:value}"
+    ],
+    "description": "Default export"
+  },
+
+  "export named": {
+    "prefix": "export",
+    "body": [
+      "export { ${1:name} }"
+    ],
+    "description": "Named export"
+  },
+
+  "try require": {
+    "prefix": "require",
+    "body": [
+      "let ${1:name} = require \"${0:module}\""
+    ],
+    "description": "Require module"
+  },
+
+  "array": {
+    "prefix": "array",
+    "body": [
+      "let ${1:items} = [${0:1, 2, 3}]"
+    ],
+    "description": "Array declaration"
+  },
+
+  "object": {
+    "prefix": "object",
+    "body": [
+      "let ${1:object} = {",
+      "\t${2:key}: ${3:value}",
+      "}"
+    ],
+    "description": "Object declaration"
+  },
+
+  "arrow function": {
+    "prefix": "arrow",
+    "body": [
+      "let ${1:name} = (${2:args}) => ${0:expression}"
+    ],
+    "description": "Arrow function expression"
+  },
+
+  "promise": {
+    "prefix": "promise",
+    "body": [
+      "let ${1:result} = new Promise((resolve, reject) => {",
+      "\t${0:resolve(value)}",
+      "})"
+    ],
+    "description": "Promise expression"
   }
 }
