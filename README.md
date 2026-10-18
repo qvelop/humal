@@ -2,6 +2,10 @@
   <img src="./assets/image/humal-logo.png" alt="Humal" width="55%">
 </p>
 
+## Languages
+
+![Languages: JavaScript 81%, Humal 19%](./assets/languages.svg)
+
 # Humal
 
 Humal is a programming language with human-readable syntax that uses indentation (like Python) and compiles directly to JavaScript (supporting both ESM and CommonJS standards).
@@ -282,8 +286,5 @@ switch value
     default
         print "no match"
 ```
-## Languages
-
-![Languages: JavaScript 81%, Humal 19%](./assets/languages.svg)
 
 More code examples and full documentation can be found on the official website: https://humal.netlify.app
