@@ -1,0 +1,15 @@
+
+import Database from "better-sqlite3"
+
+let db = new Database("test.db")
+
+db.exec("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, text TEXT)")
+
+let insert = db.prepare("INSERT INTO messages (text) VALUES (?)")
+insert.run("Hello from Humal!")
+
+let row = db.prepare("SELECT text FROM messages ORDER BY id DESC LIMIT 1").get()
+
+print row.text
+
+db.close()

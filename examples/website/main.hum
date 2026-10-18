@@ -1,0 +1,12 @@
+web.document.title = "Humal Web"
+
+web.text("#status", "Ready")
+
+fn saveName()
+    let name = web.value("#name")
+    web.localstorage.setItem("name", name)
+    web.text("#status", "Saved: " + name)
+
+web.value("#name", web.localstorage.getItem("name") ?? "")
+
+web.button("#save").onClick(saveName)

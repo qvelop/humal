@@ -8,6 +8,15 @@ var eslintDir = path.dirname(path.dirname(require.resolve('eslint')));
 var prettierDir = path.dirname(require.resolve('prettier'));
 
 var humalRoot = path.resolve(__dirname, '..');
+var humalWebTypes = path.join(
+  humalRoot,
+  'types',
+  'humal-web.d.ts'
+);
+
+function isBrowser(options) {
+  return options && options.env === 'browser';
+}
 var humalTypesRoot = path.join(
   humalRoot,
   'node_modules',
@@ -66,13 +75,11 @@ function fail(name, result) {
   throw new Error(name + ' failed:\n' + out);
 }
 
-function checkTypes(code, sourceFile, moduleFormat) {
+function checkTypes(code, sourceFile, moduleFormat, options) {
   var temp = createTempFile(sourceFile, moduleFormat, code);
 
   try {
-  var r = run(
-    TSC,
-    [
+    var args = [
       '--allowJs', '--checkJs', '--noEmit', '--strict',
       '--noImplicitAny', 'false', '--skipLibCheck',
       '--target', 'ES2022',
@@ -84,32 +91,61 @@ function checkTypes(code, sourceFile, moduleFormat) {
       '--types', 'node',
       '--pretty', 'false',
       temp
-    ],
-    path.dirname(sourceFile)
-  );
+    ];
 
-    if (r.status !== 0) fail('TypeScript validation', r);
-  } finally {
-    rmTempFile(temp);
-  }
-}
+    if (isBrowser(options)) {
+      if (!fs.existsSync(humalWebTypes)) {
+        throw new Error(
+          'Humal browser type definitions not found: ' + humalWebTypes
+        );
+      }
 
-function lint(code, sourceFile, moduleFormat) {
-  var temp = createTempFile(sourceFile, moduleFormat, code);
+      // Humal Web API global announcements.
+      args.push(humalWebTypes);
+    }
 
-  try {
     var r = run(
-      ESLINT,
-      ['--config', ESLINT_CONFIG, '--format', 'stylish', temp],
+      TSC,
+      args,
       path.dirname(sourceFile)
     );
 
-    if (r.status !== 0) fail('ESLint validation', r);
+    if (r.status !== 0) {
+      fail('TypeScript validation', r);
+    }
   } finally {
     rmTempFile(temp);
   }
 }
 
+function lint(code, sourceFile, moduleFormat, options) {
+  var temp = createTempFile(sourceFile, moduleFormat, code);
+
+  try {
+    var args = [
+      '--config', ESLINT_CONFIG,
+      '--format', 'stylish'
+    ];
+
+    if (isBrowser(options)) {
+      args.push('--global', 'web');
+    }
+
+    args.push(temp);
+
+    var r = run(
+      ESLINT,
+      args,
+      path.dirname(sourceFile)
+    );
+
+    if (r.status !== 0) {
+      fail('ESLint validation', r);
+    }
+  } finally {
+    rmTempFile(temp);
+  }
+}
 function format(code, sourceFile, moduleFormat) {
   var temp = createTempFile(sourceFile, moduleFormat, code);
 
@@ -134,9 +170,9 @@ function format(code, sourceFile, moduleFormat) {
   }
 }
 
-function processCode(code, sourceFile, moduleFormat) {
-  checkTypes(code, sourceFile, moduleFormat);
-  lint(code, sourceFile, moduleFormat);
+function processCode(code, sourceFile, moduleFormat, options) {
+  checkTypes(code, sourceFile, moduleFormat, options);
+  lint(code, sourceFile, moduleFormat, options);
   return format(code, sourceFile, moduleFormat);
 }
 

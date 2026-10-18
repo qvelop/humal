@@ -84,6 +84,19 @@ function readConfig(cwd) {
   if (config.module != null && config.module !== 'esm' && config.module !== 'cjs') {
     fail('Invalid humal.config.json: "module" must be "esm", "cjs", or null.');
   }
+  if (config.env == null) {
+  config.env = 'node';
+}
+
+if (
+  config.env !== 'node' &&
+  config.env !== 'browser'
+) {
+  fail(
+    'Invalid humal.config.json: ' +
+    '"env" must be "node" or "browser".'
+  );
+}
   config.exists = true;
   config.file = file;
   return config;
@@ -160,15 +173,16 @@ function resolveTargets(target) {
   return [Humalfile(full)];
 }
 
-function compileAndTool(source, full, format) {
+function compileAndTool(source, full, format, config) {
   var js;
   try {
     js = compile(source, format);
   } catch (e) {
     throw new Error(full + ': ' + e.message);
   }
+
   try {
-    return tooling.process(js, full, format);
+    return tooling.process(js, full, format, config);
   } catch (e) {
     throw new Error(full + ': ' + e.message);
   }
@@ -187,14 +201,14 @@ function checkOne(full, config, args) {
     return false;
   }
   try {
-    tooling.checkTypes(js, full, format);
+    tooling.checkTypes(js, full, format, config);
   } catch (e) {
     console.error('  ✗ TypeScript');
     console.error('    ' + e.message);
     return false;
   }
   try {
-    tooling.lint(js, full, format);
+    tooling.lint(js, full, format, config);
   } catch (e) {
     console.error('  ✗ ESLint');
     console.error('    ' + e.message);
@@ -207,7 +221,7 @@ function checkOne(full, config, args) {
 function buildOne(full, config, args) {
   var source = readSource(full);
   var format = resolveFormat(source, args, config, true);
-  var js = compileAndTool(source, full, format);
+  var js = compileAndTool(source, full, format, config);
   var ext = getExtension(format);
   var outFile = full.slice(0, -4) + ext;
   try {
@@ -222,7 +236,7 @@ function runOne(full, args) {
   var source = readSource(full);
   var config = readConfig(process.cwd());
   var format = resolveFormat(source, args, config, true);
-  var js = compileAndTool(source, full, format);
+  var js = compileAndTool(source, full, format, config);
   var ext = getExtension(format);
   var temp = full.slice(0, -4) + '.humal-run-' + process.pid + '-' + Date.now() + ext;
   try {

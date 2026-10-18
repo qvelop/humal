@@ -1,0 +1,6 @@
+{
+  "entry": "examples/website/main.hum",
+  "sourceDir": "examples/website/",
+  "module": "cjs",
+  "env": "browser"
+}

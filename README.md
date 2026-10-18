@@ -68,19 +68,19 @@ my-app/
 Run a Humal file directly:
 
 ```bash
-humal test.hum
+humal main.hum
 ```
 
 Use CommonJS:
 
 ```bash
-humal build test.hum --cjs
+humal build main.hum --cjs
 ```
 
 Use ESM:
 
 ```bash
-humal build test.hum --esm
+humal build main.hum --esm
 ```
 
 Check your Humal project with TypeScript and ESLint:
@@ -240,10 +240,7 @@ let { name, age } = user
 print name
 print age
 ```
-<<<<<<< HEAD
 
-More code examples and full documentation can be found on the official website: https://humal.netlify.app
-=======
 ### Basic switch
 ```bash
 let value = 2
@@ -288,4 +285,3 @@ switch value
 ```
 
 More code examples and full documentation can be found on the official website: https://humal.netlify.app
->>>>>>> 27e8206 (Release Humal 1.3.0)
