@@ -1,6 +1,7 @@
 {
   "name": "@qvelop444/humal",
   "version": "1.4.0",
+
   "description": "Humal is a programming language with human-readable syntax that uses indentation like Python and compiles directly to JavaScript, supporting both ESM and CommonJS.",
   "bin": {
     "humal": "bin/humal.js"
@@ -10,6 +11,7 @@
     "build": "node bin/humal.js build",
     "dev:web": "parcel examples/website/index.html",
     "build:web": "parcel examples/website/index.html"
+
   },
   "keywords": [
     "programming-language",
