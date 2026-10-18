@@ -32,4 +32,3 @@ jobs:
         run: npm ci
       - name: Run Humal test
         run: npm test
-

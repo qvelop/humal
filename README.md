@@ -240,7 +240,6 @@ let { name, age } = user
 print name
 print age
 ```
-
 ### Basic switch
 ```bash
 let value = 2
