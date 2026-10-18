@@ -30,6 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
       - name: Run Humal test
         run: npm test
+
