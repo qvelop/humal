@@ -5,7 +5,7 @@ const { spawnSync } = require('node:child_process');
 
 const projectRoot = path.resolve(__dirname, '..');
 const cliPath = path.join(projectRoot, 'bin', 'humal.js');
-const fixturePath = path.join(projectRoot, 'tests', 'test.hum');
+const fixturePath = path.join(projectRoot, 'test', 'test.hum');
 
 const run = spawnSync(
   process.execPath,
