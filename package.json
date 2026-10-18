@@ -6,7 +6,7 @@
     "humal": "bin/humal.js"
   },
   "scripts": {
-    "test": "node bin/humal.js examples/basic.hum",
+    "test": "node scripts/test.js",
     "build": "node bin/humal.js build"
   },
   "keywords": [
