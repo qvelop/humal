@@ -282,5 +282,8 @@ switch value
     default
         print "no match"
 ```
+## Languages
+
+![Languages: JavaScript 81%, Humal 19%](./assets/languages.svg)
 
 More code examples and full documentation can be found on the official website: https://humal.netlify.app
